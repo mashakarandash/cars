@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     private ScriptableObjectPoolData _carPool;
     [SerializeField] private bool _canCreateCar = true;
     [SerializeField] private bool _shouldOvertake;
+    [SerializeField] private TraficLight _traficLight;
     
 
     [HideInInspector] public float PublicField = 100; // убирает публичные поля внутри инспектора
@@ -114,6 +115,7 @@ public class Spawner : MonoBehaviour
     {
         int speed = Random.Range(_minSpeed, _maxSpeed); // скорости каждой машинки, диапазон
         car.TryGetComponent(out Vehicle vehicle);
+        vehicle.Initialiaze(_traficLight);
         vehicle.SetSpeed(speed); //передаем скорость которую мы зарандомили
         //car.transform.position = _spawnPosition.transform.position; // выставляе  позицию спауна
         vehicle.TeleportTonewPosition(_spawnPosition.transform.position);

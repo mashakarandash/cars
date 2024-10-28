@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public abstract class Vehicle : MonoBehaviour
     
     [SerializeField] public NavMeshAgent NavMeshAgent;
     [SerializeField] private float _distanceBetweenCar;
+    private TraficLight _traficLight;
 
     public abstract void OnMouseDown(); // встроенный метод юнити для унаследованный классов от Monobehavior, вызывается при нажатии на объект с колайдером на котором висит данный скрипn
 
@@ -44,12 +46,12 @@ public abstract class Vehicle : MonoBehaviour
     {
         NavMeshAgent.SetDestination(pointCoordinate);
         NavMeshAgent.speed = _speed;
-        NavMeshAgent.autoTraverseOffMeshLink = false;
+       // NavMeshAgent.autoTraverseOffMeshLink = false;
         _needOvertake = needOvertake;
        if (needOvertake == false)
        {
-            NavMeshAgent.avoidancePriority = 0;
-            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            /*NavMeshAgent.avoidancePriority = 0;
+            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;*/
        }
 
     }
@@ -97,5 +99,9 @@ public abstract class Vehicle : MonoBehaviour
         StartCoroutine(SearchObstacleCoroutine());
     }
 
+    internal void Initialiaze(TraficLight traficLight)
+    {
+        _traficLight = traficLight;
 
+    }
 }
