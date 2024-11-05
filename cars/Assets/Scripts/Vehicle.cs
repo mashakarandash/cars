@@ -46,12 +46,11 @@ public abstract class Vehicle : MonoBehaviour
     {
         NavMeshAgent.SetDestination(pointCoordinate);
         NavMeshAgent.speed = _speed;
-       // NavMeshAgent.autoTraverseOffMeshLink = false;
+       
         _needOvertake = needOvertake;
        if (needOvertake == false)
        {
-            /*NavMeshAgent.avoidancePriority = 0;
-            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;*/
+           
        }
 
     }
@@ -102,6 +101,27 @@ public abstract class Vehicle : MonoBehaviour
     internal void Initialiaze(TraficLight traficLight)
     {
         _traficLight = traficLight;
-
+        _traficLight.GreenLightEvent += TimeToStopActions;
     }
+
+    private void TimeToStopActions(bool isGreenLightOn)
+    {
+        if (!isGreenLightOn)
+        {
+
+            NavMeshAgent.autoTraverseOffMeshLink = false;
+            NavMeshAgent.avoidancePriority = 0;
+            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        }
+
+        else 
+        {
+
+            NavMeshAgent.autoTraverseOffMeshLink = true;
+            NavMeshAgent.avoidancePriority = 3;
+            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+        }
+    }
+
+
 }

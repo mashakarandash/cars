@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class TraficLight : MonoBehaviour
     [SerializeField] private List <Spawner> _spawner;
     public Dictionary<int, NavMeshAgent> CarsListCrossRoad = new Dictionary<int, NavMeshAgent>();
     public bool IsTimeToGreenLight => _isTimeToGreenLight;
+    public event Action<bool> GreenLightEvent;
 
 
     void Start()
@@ -29,6 +31,7 @@ public class TraficLight : MonoBehaviour
     {
         _meshRenderer.material.color = Color.green;
         _isTimeToGreenLight = true;
+        GreenLightEvent?.Invoke(true);
         foreach (var spawner in _spawner)
         {
             spawner.SwiftTraficLightAction(true);
@@ -44,6 +47,7 @@ public class TraficLight : MonoBehaviour
     {
         _meshRenderer.material.color = Color.red;
         _isTimeToGreenLight = false;
+        GreenLightEvent?.Invoke(false);
         foreach (var spawner in _spawner)
         {
             spawner.SwiftTraficLightAction(false);
@@ -66,7 +70,7 @@ public class TraficLight : MonoBehaviour
         }
         else if (other.TryGetComponent(out Vehicle car2) && _isTimeToGreenLight)
         {
-            car2.NavMeshAgent.speed = 5;
+            car2.NavMeshAgent.speed = car2.Speed;
             Debug.Log(car.Index);
             if (!CarsListCrossRoad.ContainsKey(car2.Index))
             CarsListCrossRoad.Add(car2.Index, car2.NavMeshAgent);
@@ -77,11 +81,15 @@ public class TraficLight : MonoBehaviour
     private void RestartMachine(bool canMove)
     {
         if (canMove)
-        {
+        { //проходимся по всем машинкам, которые стоят на красном свете, и выставляем им заново скорость
             foreach (var car in CarsListCrossRoad)
             {
-                car.Value.speed = 5;
-                car.Value.gameObject.GetComponent<Vehicle>().GreenLightDetected = true;
+
+                if (car.Value.gameObject.TryGetComponent(out Vehicle carComponent))
+                {
+                    carComponent.GreenLightDetected = true;
+                    car.Value.speed = carComponent.Speed;
+                }
             }
 
         }
