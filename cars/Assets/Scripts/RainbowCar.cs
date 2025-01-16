@@ -25,6 +25,13 @@ public class RainbowCar : Vehicle
 
     public override void OnMouseDown()
     {
+        if (IsTemporaryYellowCar)
+        {
+            _eventBus.ScoreChanged.Invoke();
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (_renderer.material.color == Color.yellow)
         {
             _eventBus.ScoreChanged.Invoke();
@@ -66,7 +73,12 @@ public class RainbowCar : Vehicle
         while (true)
         {
             yield return new WaitForSeconds(_delay);
-            _renderer.material.color = RandomColor();
+            if (!IsTemporaryYellowCar)
+            {
+               _renderer.material.color = RandomColor();
+
+            }
+
         }
     }
 

@@ -13,10 +13,16 @@ public abstract class Vehicle : MonoBehaviour
 
     private int _speed = 2;
     private bool _needOvertake;
+    private Color _defaultColor;
+
+    protected bool IsTemporaryYellowCar;
 
     
     [SerializeField] public NavMeshAgent NavMeshAgent;
+
     [SerializeField] private float _distanceBetweenCar;
+    [SerializeField] private ParticleSystem _collisionParticle;
+
     private TraficLight _traficLight;
 
     public abstract void OnMouseDown(); // встроенный метод юнити для унаследованный классов от Monobehavior, вызывается при нажатии на объект с колайдером на котором висит данный скрипn
@@ -123,5 +129,27 @@ public abstract class Vehicle : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.TryGetComponent(out ObstacleHandler grandma)) 
+        {
+            _collisionParticle.Play();
 
+        }
+    }
+
+    public void ConvertCarInToYellowCar()
+    {
+        IsTemporaryYellowCar = true;
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        _defaultColor = meshRenderer.material.color;
+        meshRenderer.material.color = Color.yellow;
+    }
+
+    public void ConvertCarInToDefault()
+    {
+        IsTemporaryYellowCar = false;
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material.color = _defaultColor;
+    }
 }

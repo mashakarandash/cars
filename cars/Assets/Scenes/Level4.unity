@@ -432,6 +432,9 @@ MonoBehaviour:
   _minSpeed: 1
   _maxSpeed: 10
   _pointToMove: {fileID: 194841565}
+  _canCreateCar: 1
+  _shouldOvertake: 0
+  _traficLight: {fileID: 0}
   PublicField: 100
   Directions: 0
 --- !u!1 &310265397
@@ -1222,7 +1225,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 8f53c977f38de473796be4f2bcca5bb0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 536e2e844da2b415d97922539ebaac52, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &625682073
 GameObject:
@@ -2003,6 +2006,9 @@ MonoBehaviour:
   _minSpeed: 1
   _maxSpeed: 10
   _pointToMove: {fileID: 1973445530}
+  _canCreateCar: 1
+  _shouldOvertake: 0
+  _traficLight: {fileID: 0}
   PublicField: 100
   Directions: 0
 --- !u!1 &1174227782
@@ -3398,6 +3404,9 @@ MonoBehaviour:
   _minSpeed: 1
   _maxSpeed: 10
   _pointToMove: {fileID: 2037893965}
+  _canCreateCar: 1
+  _shouldOvertake: 0
+  _traficLight: {fileID: 0}
   PublicField: 100
   Directions: 0
 --- !u!1 &1973445529
@@ -3482,6 +3491,9 @@ MonoBehaviour:
   _minSpeed: 1
   _maxSpeed: 15
   _pointToMove: {fileID: 1688965417}
+  _canCreateCar: 1
+  _shouldOvertake: 0
+  _traficLight: {fileID: 0}
   PublicField: 100
   Directions: 0
 --- !u!1 &2037893964

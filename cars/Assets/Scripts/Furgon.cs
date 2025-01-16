@@ -18,6 +18,13 @@ public class Furgon : Vehicle
 
     public override void OnMouseDown()
     {
+        if (IsTemporaryYellowCar)
+        {
+            _eventBus.ScoreChanged.Invoke();
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (_eventBus.IsTimerActive == false)
         {
           _eventBus.DoubleScore.Invoke();

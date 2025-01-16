@@ -20,10 +20,14 @@ public class YellowCarBehavior : Vehicle
 
     public override void OnMouseDown() //засчитываем очки в этом методе
     {
-       /* Sobaka++;
-        Debug.Log("нажатие" + Sobaka);
+        /* Sobaka++;
+         Debug.Log("нажатие" + Sobaka);
+         _eventBus.ScoreChanged.Invoke();
+         gameObject.SetActive(false);*/
+
+        Sobaka++;
         _eventBus.ScoreChanged.Invoke();
-        gameObject.SetActive(false);*/
+        gameObject.SetActive(false);
     }
 
    
@@ -36,10 +40,9 @@ public class YellowCarBehavior : Vehicle
 
     private void OnMouseUp()
     {
-        Sobaka++;
-        Debug.Log("нажатие" + Sobaka);
+       /* Sobaka++;
         _eventBus.ScoreChanged.Invoke();
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);*/
     }
 }
 

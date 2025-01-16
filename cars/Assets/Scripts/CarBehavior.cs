@@ -17,7 +17,17 @@ public class CarBehavior : Vehicle
 
     public override void OnMouseDown()
     {
-        _eventBus.MinusLifeAction.Invoke();
+        if (IsTemporaryYellowCar)
+        {
+            _eventBus.ScoreChanged.Invoke();
+            Debug.Log("добавление очков и преобразование ок");
+        }
+        
+        else
+        {
+            _eventBus.MinusLifeAction.Invoke();
+            Debug.Log("преобразование плохо");
+        }
         gameObject.SetActive(false);
 
     }

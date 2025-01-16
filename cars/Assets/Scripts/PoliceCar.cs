@@ -17,6 +17,13 @@ public class PoliceCar : Vehicle
 
     public override void OnMouseDown()
     {
+        if (IsTemporaryYellowCar)
+        {
+            _eventBus.ScoreChanged.Invoke();
+            gameObject.SetActive(false);
+            return;
+        }  
+
         _carPoolData.RemoveAllCar();
         gameObject.SetActive(false);
     }

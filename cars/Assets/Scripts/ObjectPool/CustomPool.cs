@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class CustomPool<T> where T : MonoBehaviour // T - Generic verible, универсальная переменная/класс
 {
@@ -71,6 +72,19 @@ public class CustomPool<T> where T : MonoBehaviour // T - Generic verible, ун�
         {
             car.gameObject.SetActive(false);
         }
+
+    }
+
+    public List<Vehicle> GetAllCars()
+    {
+        List<Vehicle> vehicles = new List<Vehicle>();
+        foreach (var item in _carList)
+        {
+            vehicles.Add(item as Vehicle);
+        }
+        return vehicles;
+
+       
 
     }
 }

@@ -13,6 +13,8 @@ public class ScriptableObjectPoolData : ScriptableObject, IService
     [SerializeField] private Furgon _furgon;
     [SerializeField] private RainbowCar _rainbowCar;
 
+     public List <Vehicle> AllCars = new List<Vehicle>();
+
 
     public CustomPool<YellowCarBehavior> YellowCarPool { get; private set; } // свойства 
     public CustomPool<CarBehavior> RedCarPool { get; private set; }
@@ -31,6 +33,16 @@ public class ScriptableObjectPoolData : ScriptableObject, IService
         PoliceCarPool = new CustomPool<PoliceCar>(_policeCar, 3);
         FurgonPool = new CustomPool<Furgon>(_furgon, 3);
         RainbowCarPool = new CustomPool<RainbowCar>(_rainbowCar, 7);
+
+        
+        AllCars.AddRange(YellowCarPool.GetAllCars());
+        AllCars.AddRange(RedCarPool.GetAllCars());
+        AllCars.AddRange(GreenCarPool.GetAllCars());
+        AllCars.AddRange(BlueCarPool.GetAllCars());
+        AllCars.AddRange(PoliceCarPool.GetAllCars());
+        AllCars.AddRange(FurgonPool.GetAllCars());
+        AllCars.AddRange(RainbowCarPool.GetAllCars());
+
     }
 
     public void RemoveAllCar()

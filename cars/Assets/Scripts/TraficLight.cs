@@ -10,9 +10,13 @@ public class TraficLight : MonoBehaviour
     [SerializeField] private int _greenTimer, _redTimer;
     [SerializeField] private bool _isTimeToGreenLight;
     [SerializeField] private List <Spawner> _spawner;
+
     public Dictionary<int, NavMeshAgent> CarsListCrossRoad = new Dictionary<int, NavMeshAgent>();
     public bool IsTimeToGreenLight => _isTimeToGreenLight;
     public event Action<bool> GreenLightEvent;
+    public Transform testObstacle;
+    public ObstacleMove testMover;
+
 
 
     void Start()
@@ -45,6 +49,11 @@ public class TraficLight : MonoBehaviour
 
     private IEnumerator RedLightCoroutine()
     {
+        if (testObstacle != null)
+        {
+            testMover.StartMoveObctacle(testObstacle, 5);
+        }
+
         _meshRenderer.material.color = Color.red;
         _isTimeToGreenLight = false;
         GreenLightEvent?.Invoke(false);
